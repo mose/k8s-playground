@@ -1,0 +1,46 @@
+# https://github.com/dockhippie/etherpad
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: etherpad
+spec:
+  type: NodePort
+  selector:
+    app: etherpad
+  ports:
+  - protocol: TCP
+    port: 80
+    targetPort: 9001
+---
+apiVersion: apps/v1beta2
+kind: Deployment
+metadata:
+  name: etherpad
+spec:
+  selector:
+    matchLabels:
+      app: etherpad
+  template:
+    metadata:
+      labels:
+        app: etherpad
+    spec:
+      containers:
+        - name: etherpad
+          image: webhippie/etherpad
+          ports:
+            - containerPort: 9001
+          env:
+            - name: ETHERPAD_USER_PASSWORD
+              value: toto
+            - name: ETHERPAD_DB_TYPE
+              value: mysql
+            - name: ETHERPAD_DB_HOST
+              value: mysql
+            - name: ETHERPAD_DB_USER
+              value: root
+            - name: ETHERPAD_DB_PASSWORD
+              value: password
+            - name: ETHERPAD_DEFAULT_PAD_TEXT
+              value: Here comes the pad ...
