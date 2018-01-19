@@ -6,10 +6,9 @@ Let's try to do something like https://serverless.com/blog/serverless-github-web
 Setup a sandbox
 -------------------
 
-So I start by launching a kubernetes sandbox from https://bitnami.com/stack/kubernetes-sandbox (there was an auth issue last week but recent releases few days ago fixed it, whoohoo).
+So I start by launching a kubernetes sandbox from https://bitnami.com/stack/kubernetes-sandbox
 
 For my comfort I want to access the Kubernetes API from home, so I had to tweak a little:
-
 
 First find the token, by getting on the server, which is configured to trust any local user to be cluster admin with kubectl
 ```
@@ -53,28 +52,28 @@ export KUBECONFIG=$KUBECONFIG:$HOME/.kube/config-sandbox
 kubectl get pods --all-namespaces
 ```
 
-Now I can kubectl locally, sweet! I'm a kubenoob so I have no idea if this is the right way to do things, but well, this worked for me.
+I'm a kubenoob so I have no idea if this is the right way to do things, but well, this worked for me.
 
 
 Install Kubeless
 -------------------
 
-Instruction from https://github.com/kubeless/kubeless#installation are really straightforward, but the links are not updated with the most recent version. So I adjusted with the `v0.3.4` version.
+Instructions from https://github.com/kubeless/kubeless#installation are really straightforward, but the links are not updated with the most recent version. So I adjusted with the `v0.3.4` version.
 
-- downlaoded kubeless and pu it in my `/usr/local/bin`
+- downlaoded kubeless and put it in my `/usr/local/bin`
 - created kubeless namespace and pods with the RBAC-enabled manifest (as kubernetes-sandbox is RBAC-enabled)
 
 
 Prepare Slack
 --------------
 
-So I created a new channel on slack, added an app of type `Incoming Webhook` so it created an url I could use to post to. That operation is pretty well described on https://serverless.com/blog/serverless-github-webhook-slack/
+So I created a new channel on one of my slack group where I'm admin. I added an app of type `Incoming Webhook` so it created an url I could use to post to. That operation is pretty well described on https://serverless.com/blog/serverless-github-webhook-slack/
 
 
 Prepare a function
 -------------------
 
-Because I'm a ruby hipster I wanna try that flavor. So I created a test file that just outputs the request just for testing.
+Because I'm a ruby geek I wanna try that flavor. So I created a test file that just outputs the request just for testing.
 
     $ kubeless function deploy stargazers --runtime ruby2.4 --from-file ./test.rb --handler test.handler --trigger-http
 
@@ -115,7 +114,7 @@ stargazers  default   stargazers.<ip>.nip.io            /     stargazers    8080
 
 (where `<ip>` is the IP of my kubernetes sandbox VM on GCE)
 
-So now I can curl and see with a fake payload:
+So now I can curl and test with a fake payload:
 ```
 $ curl --data @payload.json stargazers.<ip>.nip.io --header "Content-Type:application/json"
 ```
