@@ -133,4 +133,14 @@ $ kubeless function logs stargazers -f | grep -v healthz
 
 Very convenient.
 
-... writing in progress, last step to come ...
+Setup the github webhooks
+------------------------------
+
+So now that we have a reliable endpoint, the last stage is to configure projects in github with webhooks, using the `http://stargazers.<ip>.nip.io` endpoint, selecting only the `watch` individual event (the last one in the list). Many projects can be configured to send webhooks to that same endpoint now.
+
+What next?
+--------------
+
+- That would be good to include in the ruby code some secret token verification to avoid mis-use.
+- the ruby code right now is very basic, it would be nice to have more error handling
+- there should be some way to write a test for the function somehow, however basic it is
