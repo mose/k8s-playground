@@ -1,7 +1,7 @@
 Kubeless playground
 ========================
 
-Let's try to do something like https://serverless.com/blog/serverless-github-webhook-slack/ as an exervcise to understand how kubeless works.
+Let's try to do something like https://serverless.com/blog/serverless-github-webhook-slack/ as an exercise to understand how kubeless works.
 
 Setup a sandbox
 -------------------
@@ -105,7 +105,7 @@ Dependencies:
 
 The webhook url obviously is the one I got from slack, with random alphanum instead of blahblah.
 
-Now, to access the function through Ingress there is this manific doc on https://github.com/kubeless/kubeless/blob/master/docs/routing.md so a simple command did the job
+Now, to access the function through Ingress there is this magnificent doc on https://github.com/kubeless/kubeless/blob/master/docs/routing.md so a simple command did the job
 ```
 $ kubeless route create stargazers --function stargazers
 $ kubeless route list
