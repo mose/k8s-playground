@@ -85,7 +85,7 @@ NAME        NAMESPACE HANDLER       RUNTIME TYPE  TOPIC DEPENDENCIES  STATUS
 stargazers  default   test.handler  ruby2.4 HTTP                      1/1 READY
 ```
 
-Great. Updating the function is pretty simple, so I went directly with a real script [stargezers.rb](https://github.com/mose/k8s-playground/blob/master/kubeless/stargazers.rb)
+Great. Updating the function is pretty simple, so I went directly with a real script [stargazers.rb](https://github.com/mose/k8s-playground/blob/master/kubeless/stargazers.rb)
 ```
 $ kubeless function update stargazers --from-file stargazers.rb --handler stargazers.handler
 $ kubeless function update stargazers --env "WEBHOOK_URL=https://hooks.slack.com/services/blahblah"
