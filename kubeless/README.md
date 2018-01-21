@@ -85,7 +85,7 @@ NAME        NAMESPACE HANDLER       RUNTIME TYPE  TOPIC DEPENDENCIES  STATUS
 stargazers  default   test.handler  ruby2.4 HTTP                      1/1 READY
 ```
 
-Great. Updating the function is pretty simple, so I went directly with a real script
+Great. Updating the function is pretty simple, so I went directly with a real script [stargezers.rb](https://github.com/mose/k8s-playground/blob/master/kubeless/stargazers.rb)
 ```
 $ kubeless function update stargazers --from-file stargazers.rb --handler stargazers.handler
 $ kubeless function update stargazers --env "WEBHOOK_URL=https://hooks.slack.com/services/blahblah"
@@ -114,7 +114,7 @@ stargazers  default   stargazers.<ip>.nip.io            /     stargazers    8080
 
 (where `<ip>` is the IP of my kubernetes sandbox VM on GCE)
 
-So now I can curl and test with a fake payload:
+So now I can curl and test with a fake [payload.json](https://github.com/mose/k8s-playground/blob/master/kubeless/payload.json):
 ```
 $ curl --data @payload.json stargazers.<ip>.nip.io --header "Content-Type:application/json"
 ```
